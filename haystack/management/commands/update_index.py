@@ -187,6 +187,8 @@ class Command(LabelCommand):
         for using in self.backends:
             try:
                 self.update_backend(label, using)
+            except LookupError:
+                logging.error("LookupError updating %s using %s . Ignoring", label, using)
             except:
                 logging.exception("Error updating %s using %s ", label, using)
                 raise
